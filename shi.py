@@ -1,5 +1,5 @@
 # Always form ship name when an overlap is found
-# TODO: except when they both start or end in the same letter
+# except when they both start or end in the same letter
 
 # Onset Conservation: ship starts with the name that starts with more consonants
 
@@ -14,6 +14,9 @@
 # TODO (in the far future): offer ranking, take into account votes and Brown existence
 
 # TODO: ot3???
+
+def addConditions(ship, first, second):
+    return len(ship) > 3 and ship != first and ship != second
 
 def ship(first, second):
 
@@ -66,28 +69,24 @@ def ship(first, second):
 
     ships = []
 
-    #print a
-    #print b
-
     for l in a:
         for m in b:
-            print l[1] + " and " + m[1]
-            sameLetter = ((l[0] != 0 or m[0] !=0) and (l[0] != len(l)-1 or m[0] != len(m)-1))
-            if l[1].lower() == m[1].lower() and sameLetter:
+            notLimit = ((l[0] != 0 or m[0] !=0) and (l[0] != len(l)-1 or m[0] != len(m)-1))
+            if l[1].lower() == m[1].lower() and notLimit:
                 if countB == countA:
                     ship = first[0:l[0]] + second[m[0]:]
-                    if ship != first:
+                    if addConditions(ship, first, second):
                         ships.append(ship)
                     ship = second[0:m[0]] + first[l[0]:]
-                    if ship != second:
+                    if addConditions(ship, first, second):
                         ships.append(ship)
                 else:
                     ship = first[0:l[0]] + second[m[0]:]
-                    if ship != first:
+                    if addConditions(ship, first, second):
                         ships.append(ship)
                     else:
                         ship = second[0:m[0]] + first[l[0]:]
-                        if ship != second:
+                        if addConditions(ship, first, second):
                             ships.append(ship)
 
 
