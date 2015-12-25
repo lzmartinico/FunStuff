@@ -71,13 +71,25 @@ def ship(first, second):
 
     for l in a:
         for m in b:
-            #print l[1] + " and " + m[1]
-            if l[1].lower() == m[1].lower():
-                ship = first[0:l[0]] + second[m[0]:]
-                #print ship
-                if ship == first:
+            print l[1] + " and " + m[1]
+            sameLetter = ((l[0] != 0 or m[0] !=0) and (l[0] != len(l)-1 or m[0] != len(m)-1))
+            if l[1].lower() == m[1].lower() and sameLetter:
+                if countB == countA:
+                    ship = first[0:l[0]] + second[m[0]:]
+                    if ship != first:
+                        ships.append(ship)
                     ship = second[0:m[0]] + first[l[0]:]
-                if ship != second:
-                    ships.append(ship)
+                    if ship != second:
+                        ships.append(ship)
+                else:
+                    ship = first[0:l[0]] + second[m[0]:]
+                    if ship != first:
+                        ships.append(ship)
+                    else:
+                        ship = second[0:m[0]] + first[l[0]:]
+                        if ship != second:
+                            ships.append(ship)
+
+
     ships.sort(key = len, reverse = True)
     return ships
