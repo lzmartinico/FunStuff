@@ -1,0 +1,13 @@
+{
+    "name": "NoRoll",
+    "version": "0.1",
+    "description": "No more rickrolling!",
+    "content_scripts": [
+	{
+	   "matches": ["*://*/*"],
+	   "js": ["jquery-2.2.4.min.js", "background.js"]
+	}
+ ],
+   "web_accessible_resources": ["icon.png", "ricklist.txt"],
+   "manifest_version": 2
+}
